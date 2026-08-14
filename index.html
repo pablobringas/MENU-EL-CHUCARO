@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Chucaro — Carta</title>
+<style>
+  :root{
+    --cream:#F3EFE6;
+    --cream-2:#EAE4D5;
+    --black:#171512;
+    --gray:#6B665C;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--black);
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:72px 24px 48px;
+    text-align:center;
+    border-bottom:2px solid var(--black);
+  }
+  .hero-eyebrow{
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    font-size:11px;
+    color:var(--gray);
+    margin-bottom:20px;
+    font-weight:500;
+  }
+  .hero h1{
+    font-weight:700;
+    font-size:clamp(46px, 10vw, 84px);
+    line-height:0.92;
+    margin:0;
+    letter-spacing:-0.02em;
+    text-transform:uppercase;
+  }
+  .hero .sub{
+    font-size:13px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--gray);
+    margin-top:16px;
+    font-weight:500;
+  }
+
+  /* ---------- NAV ---------- */
+  .navwrap{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--cream);
+    border-bottom:1px solid var(--black);
+  }
+  nav.catnav{
+    display:flex;
+    gap:0;
+    overflow-x:auto;
+    padding:0 16px;
+    scrollbar-width:none;
+  }
+  nav.catnav::-webkit-scrollbar{display:none;}
+  nav.catnav a{
+    flex:0 0 auto;
+    font-size:11.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--black);
+    text-decoration:none;
+    padding:14px 14px;
+    white-space:nowrap;
+    font-weight:500;
+    border-bottom:2px solid transparent;
+    transition:border-color .15s ease, opacity .15s ease;
+    opacity:.6;
+  }
+  nav.catnav a:hover, nav.catnav a:focus-visible{
+    opacity:1;
+    border-bottom-color:var(--black);
+  }
+
+  /* ---------- CONTENT ---------- */
+  main{
+    max-width:720px;
+    margin:0 auto;
+    padding:56px 22px 100px;
+  }
+
+  .section{
+    margin-bottom:52px;
+    scroll-margin-top:52px;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:2px solid var(--black);
+    padding-bottom:10px;
+    margin-bottom:22px;
+  }
+  .section h2{
+    font-weight:700;
+    font-size:clamp(22px,4vw,28px);
+    margin:0;
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+  }
+  .section-num{
+    font-size:12px;
+    color:var(--gray);
+    font-weight:500;
+    letter-spacing:.05em;
+  }
+  .section .desc{
+    color:var(--gray);
+    font-size:13.5px;
+    margin:-14px 0 22px;
+    max-width:520px;
+  }
+  .subhead{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    color:var(--gray);
+    font-weight:600;
+    margin:34px 0 14px;
+  }
+
+  ul.dishes{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .dish{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px solid rgba(23,21,18,0.12);
+  }
+  .dish:last-child{border-bottom:none;}
+  .dish-name{
+    font-size:15.5px;
+    font-weight:400;
+    color:var(--black);
+    flex-shrink:0;
+  }
+  .dish-note{
+    display:block;
+    font-size:12px;
+    color:var(--gray);
+    margin-top:2px;
+    font-weight:400;
+  }
+  .fill{
+    flex:1;
+    border-bottom:1px dotted rgba(23,21,18,0.35);
+    transform:translateY(-4px);
+    min-width:16px;
+  }
+  .price{
+    font-weight:700;
+    font-size:15.5px;
+    color:var(--black);
+    flex-shrink:0;
+    white-space:nowrap;
+  }
+  .price::before{
+    content:"$";
+    font-weight:400;
+    margin-right:2px;
+    opacity:.6;
+  }
+
+  /* Tapeo special card */
+  .tapeo-card{
+    background:var(--black);
+    color:var(--cream);
+    padding:26px 24px;
+    margin:22px 0 8px;
+  }
+  .tapeo-card h3{
+    font-weight:700;
+    font-size:17px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    margin:0 0 8px;
+  }
+  .tapeo-card p{
+    font-size:13px;
+    line-height:1.6;
+    color:#C9C4B6;
+    margin:0 0 18px;
+  }
+  .tapeo-prices{
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+    border-top:1px solid rgba(243,239,230,0.25);
+    padding-top:16px;
+  }
+  .tapeo-prices div{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .tapeo-prices span.who{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#9B9686;
+  }
+  .tapeo-prices span.p{
+    font-weight:700;
+    font-size:20px;
+    color:var(--cream);
+  }
+  .tapeo-prices span.p::before{content:"$";font-weight:400;margin-right:2px;opacity:.6;}
+
+  /* footer */
+  footer{
+    background:var(--black);
+    color:#9B9686;
+    text-align:center;
+    padding:44px 24px 36px;
+  }
+  footer h4{
+    color:var(--cream);
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    font-weight:700;
+    margin:0 0 10px;
+  }
+  footer p{
+    font-size:12px;
+    line-height:1.7;
+    max-width:340px;
+    margin:0 auto;
+  }
+  .hashtag{
+    display:inline-block;
+    margin-top:18px;
+    font-size:11px;
+    letter-spacing:.15em;
+    color:#6E6A5C;
+    text-transform:uppercase;
+  }
+
+  @media (max-width:480px){
+    .dish{flex-wrap:wrap;}
+    .dish-name{width:100%;}
+    .fill{display:none;}
+    .price{margin-left:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-eyebrow">Cocina de montaña · Bariloche</div>
+  <h1>El Chucaro</h1>
+  <div class="sub">Bodegón gourmet patagónico</div>
+</header>
+
+<div class="navwrap">
+  <nav class="catnav">
+    <a href="#entradas">Entradas</a>
+    <a href="#ensaladas">Ensaladas</a>
+    <a href="#especialidades">Especialidades</a>
+    <a href="#montana">Montaña</a>
+    <a href="#patagonica">Patagónica</a>
+    <a href="#guarniciones">Guarniciones</a>
+    <a href="#pizzas">Pizzas</a>
+    <a href="#pastas">Pastas</a>
+    <a href="#minutas">Minutas</a>
+    <a href="#infantil">Infantil</a>
+    <a href="#bebidas">Bebidas</a>
+    <a href="#cervezas">Cervezas</a>
+  </nav>
+</div>
+
+<main>
+
+  <!-- ENTRADAS -->
+  <section class="section" id="entradas">
+    <div class="section-head"><h2>Entradas</h2><span class="section-num">01</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Rabas a la romana</span><span class="fill"></span><span class="price">28.000</span></li>
+      <li class="dish"><span class="dish-name">Langostinos</span><span class="fill"></span><span class="price">28.000</span></li>
+      <li class="dish"><span class="dish-name">Provoleta especial</span><span class="fill"></span><span class="price">18.000</span></li>
+      <li class="dish"><span class="dish-name">Empanadas <span class="dish-note">unidad</span></span><span class="fill"></span><span class="price">4.000</span></li>
+      <li class="dish"><span class="dish-name">Vegetales grillados</span><span class="fill"></span><span class="price">10.600</span></li>
+    </ul>
+
+    <div class="tapeo-card">
+      <h3>Tapeo Chucaro</h3>
+      <p>Frutos de mar acompañados con embutidos: bruschetas de salmón ahumado, bocaditos de merluza, bastoncitos de muzza, jamón crudo, quesos saborizados, huevos, aceitunas.</p>
+      <div class="tapeo-prices">
+        <div><span class="who">2 personas</span><span class="p">45.000</span></div>
+        <div><span class="who">4 personas</span><span class="p">60.000</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENSALADAS -->
+  <section class="section" id="ensaladas">
+    <div class="section-head"><h2>Ensaladas</h2><span class="section-num">02</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Ensalada Chucaro</span><span class="fill"></span><span class="price">16.500</span></li>
+      <li class="dish"><span class="dish-name">Ensalada césar</span><span class="fill"></span><span class="price">20.000</span></li>
+      <li class="dish"><span class="dish-name">Mixta <span class="dish-note">lechuga, tomate y cebolla</span></span><span class="fill"></span><span class="price">10.500</span></li>
+      <li class="dish"><span class="dish-name">Rúcula y parmesano</span><span class="fill"></span><span class="price">10.500</span></li>
+      <li class="dish"><span class="dish-name">Remolacha, papa y huevo</span><span class="fill"></span><span class="price">9.300</span></li>
+      <li class="dish"><span class="dish-name">Zanahoria y huevo</span><span class="fill"></span><span class="price">8.200</span></li>
+      <li class="dish"><span class="dish-name">Lechuga y tomate</span><span class="fill"></span><span class="price">6.300</span></li>
+    </ul>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section class="section" id="especialidades">
+    <div class="section-head"><h2>Especialidades</h2><span class="section-num">03</span></div>
+    <p class="desc">Pescados, mariscos y arroces.</p>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Paella de mariscos</span><span class="fill"></span><span class="price">32.200</span></li>
+      <li class="dish"><span class="dish-name">Paella valenciana</span><span class="fill"></span><span class="price">30.500</span></li>
+      <li class="dish"><span class="dish-name">Paella negra</span><span class="fill"></span><span class="price">28.700</span></li>
+      <li class="dish"><span class="dish-name">Risotto</span><span class="fill"></span><span class="price">27.000</span></li>
+      <li class="dish"><span class="dish-name">Abadejo con papas al natural</span><span class="fill"></span><span class="price">29.400</span></li>
+      <li class="dish"><span class="dish-name">Trucha al limón con papas natural</span><span class="fill"></span><span class="price">36.000</span></li>
+      <li class="dish"><span class="dish-name">Trucha al roquefort</span><span class="fill"></span><span class="price">38.500</span></li>
+      <li class="dish"><span class="dish-name">Trucha a la manteca negra</span><span class="fill"></span><span class="price">39.500</span></li>
+      <li class="dish"><span class="dish-name">Filet de merluza a la romana</span><span class="fill"></span><span class="price">25.000</span></li>
+      <li class="dish"><span class="dish-name">Filet de lenguado con puré mixto</span><span class="fill"></span><span class="price">27.000</span></li>
+    </ul>
+  </section>
+
+  <!-- COCINA DE MONTAÑA -->
+  <section class="section" id="montana">
+    <div class="section-head"><h2>Cocina de montaña</h2><span class="section-num">04</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Guiso de lenteja a la española</span><span class="fill"></span><span class="price">25.000</span></li>
+      <li class="dish"><span class="dish-name">Mondongo a la española</span><span class="fill"></span><span class="price">25.000</span></li>
+      <li class="dish"><span class="dish-name">Gulash</span><span class="fill"></span><span class="price">30.000</span></li>
+    </ul>
+  </section>
+
+  <!-- COCINA PATAGONICA -->
+  <section class="section" id="patagonica">
+    <div class="section-head"><h2>Cocina patagónica</h2><span class="section-num">05</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Lomo al champiñón</span><span class="fill"></span><span class="price">32.000</span></li>
+      <li class="dish"><span class="dish-name">Lomo a la pimienta negra</span><span class="fill"></span><span class="price">30.000</span></li>
+      <li class="dish"><span class="dish-name">Bife a la pimienta negra</span><span class="fill"></span><span class="price">28.750</span></li>
+      <li class="dish"><span class="dish-name">Bife a la criolla</span><span class="fill"></span><span class="price">31.000</span></li>
+      <li class="dish"><span class="dish-name">Bife grillado</span><span class="fill"></span><span class="price">25.300</span></li>
+      <li class="dish"><span class="dish-name">Ojo de bife a la griega</span><span class="fill"></span><span class="price">30.400</span></li>
+      <li class="dish"><span class="dish-name">Pollo al verdeo</span><span class="fill"></span><span class="price">22.600</span></li>
+      <li class="dish"><span class="dish-name">Pollo a la provenzal</span><span class="fill"></span><span class="price">24.500</span></li>
+      <li class="dish"><span class="dish-name">Pollo a la naranja</span><span class="fill"></span><span class="price">26.600</span></li>
+      <li class="dish"><span class="dish-name">Bondiola braceada con reducción al Malbec</span><span class="fill"></span><span class="price">31.000</span></li>
+    </ul>
+  </section>
+
+  <!-- GUARNICIONES -->
+  <section class="section" id="guarniciones">
+    <div class="section-head"><h2>Guarniciones</h2><span class="section-num">06</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Papas a la crema</span><span class="fill"></span><span class="price">10.500</span></li>
+      <li class="dish"><span class="dish-name">Papas fritas o española</span><span class="fill"></span><span class="price">9.400</span></li>
+      <li class="dish"><span class="dish-name">Puré de papa o calabaza</span><span class="fill"></span><span class="price">9.400</span></li>
+      <li class="dish"><span class="dish-name">Papas al natural</span><span class="fill"></span><span class="price">8.000</span></li>
+      <li class="dish"><span class="dish-name">Arroz blanco</span><span class="fill"></span><span class="price">9.700</span></li>
+    </ul>
+  </section>
+
+  <!-- PIZZAS -->
+  <section class="section" id="pizzas">
+    <div class="section-head"><h2>Pizzas &amp; calzones</h2><span class="section-num">07</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Muzzarella</span><span class="fill"></span><span class="price">24.000</span></li>
+      <li class="dish"><span class="dish-name">Napolitana</span><span class="fill"></span><span class="price">27.400</span></li>
+      <li class="dish"><span class="dish-name">Fugazzeta</span><span class="fill"></span><span class="price">26.000</span></li>
+      <li class="dish"><span class="dish-name">Jamón y morrones</span><span class="fill"></span><span class="price">30.600</span></li>
+      <li class="dish"><span class="dish-name">Provolone</span><span class="fill"></span><span class="price">32.500</span></li>
+      <li class="dish"><span class="dish-name">Panceta y cebolla</span><span class="fill"></span><span class="price">33.100</span></li>
+      <li class="dish"><span class="dish-name">Rúcula y jamón crudo</span><span class="fill"></span><span class="price">34.100</span></li>
+      <li class="dish"><span class="dish-name">Pollo y panceta</span><span class="fill"></span><span class="price">28.100</span></li>
+      <li class="dish"><span class="dish-name">Vegetariana</span><span class="fill"></span><span class="price">31.600</span></li>
+      <li class="dish"><span class="dish-name">Palmitos y salsa golf</span><span class="fill"></span><span class="price">32.500</span></li>
+      <li class="dish"><span class="dish-name">Margarita</span><span class="fill"></span><span class="price">33.000</span></li>
+      <li class="dish"><span class="dish-name">Pepperoni</span><span class="fill"></span><span class="price">35.000</span></li>
+      <li class="dish"><span class="dish-name">Frutos de mar</span><span class="fill"></span><span class="price">consultar</span></li>
+    </ul>
+  </section>
+
+  <!-- PASTAS -->
+  <section class="section" id="pastas">
+    <div class="section-head"><h2>Pastas</h2><span class="section-num">08</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Tallarines al huevo</span><span class="fill"></span><span class="price">15.800</span></li>
+      <li class="dish"><span class="dish-name">Ravioles</span><span class="fill"></span><span class="price">17.600</span></li>
+      <li class="dish"><span class="dish-name">Sorrentinos</span><span class="fill"></span><span class="price">20.000</span></li>
+      <li class="dish"><span class="dish-name">Ñoquis de papa</span><span class="fill"></span><span class="price">17.000</span></li>
+      <li class="dish"><span class="dish-name">Lasagna mixta</span><span class="fill"></span><span class="price">25.000</span></li>
+      <li class="dish"><span class="dish-name">Tallarines de espinaca</span><span class="fill"></span><span class="price">16.600</span></li>
+      <li class="dish"><span class="dish-name">Canelones</span><span class="fill"></span><span class="price">18.500</span></li>
+    </ul>
+    <div class="subhead">Nuestras salsas</div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Fileto, rosa, blanca o crema</span><span class="fill"></span><span class="price">4.500</span></li>
+      <li class="dish"><span class="dish-name">Bolognesa</span><span class="fill"></span><span class="price">7.500</span></li>
+      <li class="dish"><span class="dish-name">Alfredo</span><span class="fill"></span><span class="price">7.500</span></li>
+      <li class="dish"><span class="dish-name">Scarpano</span><span class="fill"></span><span class="price">7.500</span></li>
+      <li class="dish"><span class="dish-name">Parisienne</span><span class="fill"></span><span class="price">7.500</span></li>
+      <li class="dish"><span class="dish-name">Crema de champiñones</span><span class="fill"></span><span class="price">7.500</span></li>
+    </ul>
+  </section>
+
+  <!-- MINUTAS -->
+  <section class="section" id="minutas">
+    <div class="section-head"><h2>Minutas</h2><span class="section-num">09</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Milanesa napolitana con papas fritas</span><span class="fill"></span><span class="price">25.800</span></li>
+      <li class="dish"><span class="dish-name">Milanesa a la suiza con puré</span><span class="fill"></span><span class="price">23.400</span></li>
+      <li class="dish"><span class="dish-name">Milanesa a la italiana con papas fritas</span><span class="fill"></span><span class="price">25.600</span></li>
+      <li class="dish"><span class="dish-name">Suprema napolitana con papas fritas</span><span class="fill"></span><span class="price">24.700</span></li>
+      <li class="dish"><span class="dish-name">Suprema con puré o papas fritas</span><span class="fill"></span><span class="price">21.600</span></li>
+      <li class="dish"><span class="dish-name">Milanesa de ternera con puré o fritas</span><span class="fill"></span><span class="price">22.400</span></li>
+      <li class="dish"><span class="dish-name">Milanesa Chucaro</span><span class="fill"></span><span class="price">64.000</span></li>
+    </ul>
+  </section>
+
+  <!-- INFANTIL -->
+  <section class="section" id="infantil">
+    <div class="section-head"><h2>Menú infantil</h2><span class="section-num">10</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Nuggets de pollo con puré</span><span class="fill"></span><span class="price">15.000</span></li>
+      <li class="dish"><span class="dish-name">Milanesita con puré o papas fritas</span><span class="fill"></span><span class="price">14.600</span></li>
+      <li class="dish"><span class="dish-name">Pollo grillado con puré</span><span class="fill"></span><span class="price">15.870</span></li>
+      <li class="dish"><span class="dish-name">Hamburguesa con puré o papas fritas</span><span class="fill"></span><span class="price">17.600</span></li>
+    </ul>
+  </section>
+
+  <!-- BEBIDAS -->
+  <section class="section" id="bebidas">
+    <div class="section-head"><h2>Bebidas sin alcohol</h2><span class="section-num">11</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">Línea Coca-Cola <span class="dish-note">Coca-Cola, Fanta, Sprite, Schweppes</span></span><span class="fill"></span><span class="price">4.000</span></li>
+      <li class="dish"><span class="dish-name">Agua con gas</span><span class="fill"></span><span class="price">3.500</span></li>
+      <li class="dish"><span class="dish-name">Agua sin gas</span><span class="fill"></span><span class="price">3.500</span></li>
+      <li class="dish"><span class="dish-name">Aguas saborizadas</span><span class="fill"></span><span class="price">4.000</span></li>
+      <li class="dish"><span class="dish-name">Jugo exprimido</span><span class="fill"></span><span class="price">7.500</span></li>
+    </ul>
+  </section>
+
+  <!-- CERVEZAS -->
+  <section class="section" id="cervezas">
+    <div class="section-head"><h2>Cervezas</h2><span class="section-num">12</span></div>
+    <ul class="dishes">
+      <li class="dish"><span class="dish-name">1/2 pinta tirada</span><span class="fill"></span><span class="price">4.500</span></li>
+      <li class="dish"><span class="dish-name">Pinta tirada</span><span class="fill"></span><span class="price">9.500</span></li>
+      <li class="dish"><span class="dish-name">Quilmes 473cm³</span><span class="fill"></span><span class="price">7.000</span></li>
+      <li class="dish"><span class="dish-name">Stella Artois</span><span class="fill"></span><span class="price">7.000</span></li>
+      <li class="dish"><span class="dish-name">Patagonia 473cm³</span><span class="fill"></span><span class="price">8.500</span></li>
+      <li class="dish"><span class="dish-name">Andes 473cm³</span><span class="fill"></span><span class="price">8.500</span></li>
+      <li class="dish"><span class="dish-name">Corona 330cm³</span><span class="fill"></span><span class="price">7.000</span></li>
+      <li class="dish"><span class="dish-name">Cerveza sin alcohol</span><span class="fill"></span><span class="price">6.000</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <h4>El Chucaro</h4>
+  <p>Precios sujetos a variación de temporada. Consultá por opciones sin TACC y viandas para excursión.</p>
+  <span class="hashtag">#BuenaCocina</span>
+</footer>
+
+</body>
+</html>
